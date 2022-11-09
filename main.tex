@@ -1,0 +1,442 @@
+\documentclass[10pt]{beamer}
+
+% \makeatletter
+% \g@addto@macro\normalsize{%
+%     \setlength\belowdisplayskip{-0pt}
+% }
+
+\usepackage[english]{babel}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{ragged2e} \justifying\let\raggedright\justifying 
+
+\usefonttheme{structuresmallcapsserif}
+\setbeamerfont{title}{family=\fontfamily{bch}\selectfont}
+\setbeamerfont{frametitle}{family=\fontfamily{bch}\selectfont}
+\setbeamerfont{framesubtitle}{family=\fontfamily{bch}\selectfont}
+\setbeamerfont{framesubsubtitle}{family=\fontfamily{bch}\selectfont}
+\setbeamerfont{footline}{family=\fontfamily{bch}\selectfont}
+\setbeamerfont{subsection in toc}{family=\fontfamily{bch}\selectfont}
+\setbeamerfont{section in toc}{family=\fontfamily{bch}\selectfont}
+\usefonttheme{professionalfonts}
+\renewcommand*\sfdefault{cmbr}
+
+% 去掉下面没用的导航条
+\setbeamertemplate{navigation symbols}{}
+% 设置页脚格式
+\makeatother
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+    \hspace*{50em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{0ex}
+  \end{beamercolorbox}}
+
+  \vskip0pt%
+}
+\makeatletter
+
+\renewcommand{\emph}[1]{\textbf{\color{color5}#1}}
+
+% 定义颜色
+%\definecolor{alizarin}{rgb}{0.82, 0.1, 0.26} % 红色
+%\definecolor{DarkFern}{HTML}{407428} % 绿色
+%\colorlet{main}{DarkFern!100!white} % 第一种设置方法
+%\colorlet{main}{red!70!black} % 第二种设置方法
+\definecolor{bistre}{rgb}{0.24, 0.17, 0.12}
+
+\definecolor{color1}{RGB}{93, 113, 170}
+\definecolor{color2}{RGB}{135, 197, 237}
+\definecolor{color3}{RGB}{241, 182, 194}
+\definecolor{color4}{RGB}{197, 224, 169}
+\definecolor{color5}{RGB}{222, 32, 120}
+\definecolor{color6}{RGB}{233, 203, 153}
+
+\colorlet{main}{white}
+\colorlet{text}{bistre!100!white}
+
+% 不同元素指定不同颜色，fg是本身颜色，bg是背景颜色，!num!改变数值提供渐变色
+\setbeamercolor{title}{fg=main}
+\setbeamercolor{frametitle}{fg=main}
+\setbeamercolor{section in toc}{fg=text}
+\setbeamercolor{normal text}{fg=text}
+\setbeamercolor{qed symbol}{fg=color4} % 证明结束后的框颜色
+%\setbeamercolor{math text}{fg=black} % 奇异代码，导致tcolorbox中的equation多一个空行
+% 设置页脚对应位置颜色
+\setbeamercolor{title in head/foot}{fg=main, bg=color1}
+\setbeamercolor{structure}{fg=main, bg=color1} % 设置sidebar颜色
+
+% 左右页间距的排版
+\def\swidth{0cm}
+\setbeamersize{sidebar width right=\swidth}
+\setbeamersize{sidebar width left=\swidth}
+\setbeamerfont{title in sidebar}{size=\scriptsize}
+\setbeamerfont{section in sidebar}{size=\tiny}
+
+% tcolorbox相关
+\usepackage{etoolbox,amssymb}
+\usepackage[many]{tcolorbox}
+
+
+% 不带证毕符号的proof
+\newtheorem{myproofcut}{Proof}[section]
+\makeatletter
+\renewtcolorbox[use counter=myproofcut,number within=section]{myproofcut}[1][]{
+  title={Proof\ #1},
+  colback=color4!10!white,
+  colframe=color4,
+  fonttitle=\fontfamily{bch}\selectfont\bfseries,
+}
+\makeatother
+
+\usepackage{amssymb}% defines \blacksquare
+\renewcommand{\qedsymbol}{{$\color{color4}\blacksquare$}}
+\AtBeginEnvironment{myproof}{\pushQED{\qed}}
+\AtEndEnvironment{myproof}{\popQED}
+\newtheorem{myproof}{Proof}[section]
+\makeatletter
+\renewtcolorbox[use counter=myproof,number within=section]{myproof}[1][]{
+  title={Proof\ #1},
+  colback=color4!10!white,
+  colframe=color4,
+  fonttitle=\fontfamily{bch}\selectfont\bfseries,
+}
+\makeatother
+
+\newtheorem{mysol}{Proof}[section]
+\makeatletter
+\renewtcolorbox[use counter=mysol,number within=section]{mysol}[1][]{
+  title={Solution\ #1},
+  colback=color4!10!white,
+  colframe=color4,
+  fonttitle=\fontfamily{bch}\selectfont\bfseries,
+}
+\makeatother
+
+\newtheorem{mydef}{Definition}[section]
+\makeatletter
+\renewtcolorbox[use counter=mydef,number within=section]{mydef}[1][]{
+  title={Definition \themydef\ #1},
+  colback=color3!10!white,
+  colframe=color3,
+  fonttitle=\fontfamily{bch}\selectfont\bfseries,
+}
+\makeatother
+
+\newtheorem{mythm}{Theorem}[section]
+\makeatletter
+\renewtcolorbox[use counter=mythm,number within=section]{mythm}[1][]{
+  title={Theorem \themythm\ #1},
+  colback=color2!10!white,
+  colframe=color2,
+  fonttitle=\fontfamily{bch}\selectfont\bfseries,
+}
+\makeatother
+
+\newtheorem{mylem}{Theorem}[section]
+\makeatletter
+\renewtcolorbox[use counter=mylem,number within=section]{mylem}[1][]{
+  title={Lemma \themylem\ #1},
+  colback=color2!10!white,
+  colframe=color2,
+  fonttitle=\fontfamily{bch}\selectfont\bfseries,
+}
+\makeatother
+
+\newtheorem{mycol}{Theorem}[section]
+\makeatletter
+\renewtcolorbox[use counter=mycol,number within=section]{mycol}[1][]{
+  title={Corollary \themycol\ #1},
+  colback=color2!10!white,
+  colframe=color2,
+  fonttitle=\fontfamily{bch}\selectfont\bfseries,
+}
+\makeatother
+
+\newtheorem{myfact}{Theorem}[section]
+\makeatletter
+\renewtcolorbox[use counter=myfact,number within=section]{myfact}[1][]{
+  title={Fact \themyfact\ #1},
+  colback=color2!10!white,
+  colframe=color2,
+  fonttitle=\fontfamily{bch}\selectfont\bfseries,
+}
+\makeatother
+
+\newtheorem{mypro}{Theorem}[section]
+\makeatletter
+\renewtcolorbox[use counter=mypro,number within=section]{mypro}[1][]{
+  title={Proposition \themypro\ #1},
+  colback=color2!10!white,
+  colframe=color2,
+  fonttitle=\fontfamily{bch}\selectfont\bfseries,
+}
+\makeatother
+
+\newtheorem{mycon}{Theorem}[section]
+\makeatletter
+\renewtcolorbox[use counter=mycon,number within=section]{mycon}[1][]{
+  title={Conjecture \themycon\ #1},
+  colback=color2!10!white,
+  colframe=color2,
+  fonttitle=\fontfamily{bch}\selectfont\bfseries,
+}
+\makeatother
+
+\newtheorem{myclaim}{Theorem}[section]
+\makeatletter
+\renewtcolorbox[use counter=myclaim,number within=section]{myclaim}[1][]{
+  title={Claim \themyclaim\ #1},
+  colback=color2!10!white,
+  colframe=color2,
+  fonttitle=\fontfamily{bch}\selectfont\bfseries,
+}
+\makeatother
+
+\newtheorem{myexa}{Theorem}[section]
+\makeatletter
+\renewtcolorbox[use counter=myexa,number within=section]{myexa}[1][]{
+  title={Example \themyexa\ #1},
+  colback=color6!10!white,
+  colframe=color6,
+  fonttitle=\fontfamily{bch}\selectfont\bfseries,
+}
+\makeatother
+
+\newtheorem{myrem}{Theorem}[section]
+\makeatletter
+\renewtcolorbox[use counter=myrem,number within=section]{myrem}[1][]{
+  title={Remark \themyrem\ #1},
+  colback=color6!10!white,
+  colframe=color6,
+  fonttitle=\fontfamily{bch}\selectfont\bfseries,
+}
+\makeatother
+
+% 去掉章节标号
+\defbeamertemplate{section page}{mine}[1][]{%
+  \begin{centering}
+    {\usebeamerfont{section name}\usebeamercolor[fg]{section name}#1}
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=12pt,center]{part title}
+      \usebeamerfont{section title}\insertsection\par
+    \end{beamercolorbox}
+  \end{centering}
+}
+
+\defbeamertemplate{subsection page}{mine}[1][]{%
+  \begin{centering}
+    {\usebeamerfont{subsection name}\usebeamercolor[fg]{subsection name}#1}
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,center,#1]{part title}
+      \usebeamerfont{subsection title}\insertsubsection\par
+    \end{beamercolorbox}
+  \end{centering}
+}
+
+% 修改item样式
+\setbeamertemplate{itemize item}{$\color{color5}\clubsuit$}
+\setbeamertemplate{itemize subitem}{$\color{color5}\diamondsuit$}
+\setbeamertemplate{itemize subsubitem}{$\color{color5}\spadesuit$}
+\setbeamerfont{enumerate item}{family=\fontfamily{bch}\selectfont}
+\setbeamerfont{enumerate subitem}{family=\fontfamily{bch}\selectfont}
+\setbeamerfont{enumerate subsubitem}{family=\fontfamily{bch}\selectfont}
+\setbeamercolor{enumerate item}{fg=color5}
+\setbeamercolor{enumerate subitem}{fg=color5}
+\setbeamercolor{enumerate subsubitem}{fg=color5}
+
+%-------------------正文-------------------------%
+
+\author{Your Name}
+\title{Presentation Title}
+\date{\today}
+
+\begin{document}
+\setbeamertemplate{section page}[mine]
+\setbeamertemplate{subsection page}[mine]
+
+\frame[plain]{\titlepage}
+
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Page Title}
+
+\begin{frame}
+\sectionpage
+\end{frame}
+
+\begin{frame}
+\frametitle{Page Title}
+
+TeX - LaTeX Stack Exchange is a question and answer site for users of TeX, LaTeX, ConTeXt, and related typesetting systems.
+
+\vspace{0.4cm}
+
+unordered list below
+
+\begin{itemize}
+\item The first item
+\item The second item
+\item The third item
+\item The fourth item
+\begin{itemize}
+\item The first item
+\item The second item
+\item The third item
+\item The fourth item
+\begin{itemize}
+\item The first item
+\item The second item
+\item The third item
+\item The fourth item
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\section{Display Theorem}
+
+\frame{\frametitle{Outline}\tableofcontents[currentsection]}
+
+\subsection{First subsection}
+
+\subsection{Second subsection}
+
+\begin{frame}{Frame Title}
+    \subsectionpage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Display Theorem}
+  \begin{mythm}
+    This is a text in second frame. $1 + 2 = 3$
+  \end{mythm}
+  \begin{myproof}
+    This is a text in second frame. $1 + 1 + 1 = 3$
+    \begin{displaymath}
+    1 + 1 = 2\qedhere
+    \end{displaymath}
+  \end{myproof}
+  \begin{myproofcut}
+    This is a text in second frame. 
+    \begin{displaymath}
+    1 + 1 = 2
+    \end{displaymath}%
+  \end{myproofcut}
+\end{frame}
+
+\section{Sample frame title}
+
+\frame{\frametitle{Outline}\tableofcontents[currentsection]}
+
+\begin{frame}
+\frametitle{Sample frame title}
+This is a text in second frame.
+For the sake of showing an example.
+
+\begin{enumerate}
+ \itemsep0em
+ \item Text visible on slide 1
+ \item Text visible on slide 2
+ \item Text visible on slide 3
+ \begin{enumerate}
+ \itemsep0em
+ \item Text visible on slide 1
+ \item Text visible on slide 2
+ \item Text visible on slide 3
+ \begin{enumerate}
+ \itemsep0em
+ \item Text visible on slide 1
+ \item Text visible on slide 2
+ \item Text visible on slide 3
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \begin{mydef}
+    $$
+ \frac{1}{\displaystyle 1+
+   \frac{1}{\displaystyle 2+
+   \frac{1}{\displaystyle 3+x}}} +
+ \frac{1}{1+\frac{1}{2+\frac{1}{3+x}}}
+$$
+$$\int_0^\infty e^{-x^2} dx=\frac{\sqrt{\pi}}{2}$$
+\begin{equation} x=y+3 \label{eq:xdef}
+\end{equation}
+In equation (\ref{eq:xdef}) we saw $\dots$
+  \end{mydef}
+
+  \begin{myrem}
+        This is a text in second frame.
+        For the sake of showing an example.
+        $x=y+3$
+  \end{myrem}
+  
+\end{frame}
+
+\begin{frame}{Frame Title}
+    \begin{myexa}
+        This is a text in second frame.
+        For the sake of showing an example.
+        $x=y+3$
+    \end{myexa}
+
+    \begin{mycol}
+        This is a text in second frame.
+        For the sake of showing an example.
+        $x=y+3$
+    \end{mycol}
+
+    \begin{mylem}
+        This is a text in second frame.
+        For the sake of showing an example.
+        $x=y+3$
+    \end{mylem}
+\end{frame}
+
+\begin{frame}{Frame Title}
+    \begin{myfact}
+        This is a text in second frame.
+        For the sake of showing an example.
+        $x=y+3$
+    \end{myfact}
+
+    \begin{mycon}
+        This is a text in second frame.
+        For the sake of showing an example.
+        $x=y+3$
+    \end{mycon}
+
+    \begin{mypro}
+        This is a text in second frame.
+        For the sake of showing an example.
+        $x=y+3$
+    \end{mypro}
+\end{frame}
+
+\begin{frame}{Frame Title}
+    \begin{myclaim}
+        This is a text in second frame.
+        For the sake of showing an example.
+        $$x=y+3$$
+    \end{myclaim}
+
+    \begin{mysol}
+        This is a \emph{text} in second frame.
+        For the sake of showing an example.
+        $$x=y+3$$
+    \end{mysol}
+\end{frame}
+
+
+\end{document}
