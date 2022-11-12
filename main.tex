@@ -1,7 +1,6 @@
 \documentclass[10pt]{beamer}
 
 \usepackage{fontawesome}
-
 \usepackage[english]{babel}
 \usepackage{mathrsfs}
 \usepackage{mathtools}
@@ -236,9 +235,11 @@
 }
 
 % 修改item样式
-\setbeamertemplate{itemize item}{\color{color5}\faSunO}
-\setbeamertemplate{itemize subitem}{\color{color5}\faMoonO}
-\setbeamertemplate{itemize subsubitem}{\color{color5}\faStarO}
+
+% 修改item样式
+\setbeamertemplate{itemize item}{\raisebox{.4\height}{\color{color5}\tiny\faSunO}}
+\setbeamertemplate{itemize subitem}{\raisebox{.4\height}{\color{color5}\tiny\faMoonO}}
+\setbeamertemplate{itemize subsubitem}{\raisebox{.4\height}{\color{color5}\tiny\faStarO}}
 \setbeamerfont{enumerate item}{family=\fontfamily{bch}\selectfont}
 \setbeamerfont{enumerate subitem}{family=\fontfamily{bch}\selectfont}
 \setbeamerfont{enumerate subsubitem}{family=\fontfamily{bch}\selectfont}
@@ -250,6 +251,7 @@
 
 \author{Your Name}
 \title{A very looooooooooong  looooooooooong  looooooooooong Presentation Title}
+\institute{xxx University}
 \date{\today}
 
 \begin{document}
